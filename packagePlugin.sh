@@ -12,7 +12,7 @@ if [ -f StartingTeleporters.zip ]; then
   rm -rf StartingTeleporters.zip
 fi
 
-zip -r StartingTeleporters.zip icon.png manifest.json README.md BepInEX/
+zip -r StartingTeleporters.zip icon.png manifest.json README.md CHANGELOG.md BepInEX/
 
 if test -d BepInEX/; then
   rm -rf BepInEX/
