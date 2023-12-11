@@ -47,9 +47,9 @@ internal class STPatches {
     private static void unlockShipItem(StartOfRound instance, int unlockableID, string name) {
         try {
             Plugin.log.LogInfo($"Attempting to unlock {name}");
-            var spawn = instance.GetType().GetMethod("UnlockShipObject",
+            var unlockShipMethod = instance.GetType().GetMethod("UnlockShipObject",
                 BindingFlags.NonPublic | BindingFlags.Instance);
-            spawn.Invoke(instance, new object[] { unlockableID });
+            unlockShipMethod.Invoke(instance, new object[] { unlockableID });
             Plugin.log.LogInfo($"Spawning {name}");
         } catch (NullReferenceException ex) {
             Plugin.log.LogError($"Could not invoke UnlockShipObject method: {ex}");
