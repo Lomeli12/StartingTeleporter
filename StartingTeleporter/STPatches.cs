@@ -12,6 +12,9 @@ internal class STPatches {
     private static int inverseTeleporterID = -1;
 
     internal static void startPatch(ref StartOfRound __instance) {
+        if (!__instance.IsServer)
+            return;
+        
         if (!idsInitialized)
             getTeleporterIDs(__instance);
         try {
@@ -47,9 +50,8 @@ internal class STPatches {
     private static void unlockShipItem(StartOfRound instance, int unlockableID, string name) {
         try {
             Plugin.log.LogInfo($"Attempting to unlock {name}");
-            var unlockShipMethod = instance.GetType().GetMethod("UnlockShipObject",
                 BindingFlags.NonPublic | BindingFlags.Instance);
-            unlockShipMethod.Invoke(instance, new object[] { unlockableID });
+            spawn.Invoke(instance, new object[] { unlockableID });
             Plugin.log.LogInfo($"Spawning {name}");
         } catch (NullReferenceException ex) {
             Plugin.log.LogError($"Could not invoke UnlockShipObject method: {ex}");
