@@ -1,6 +1,6 @@
 ﻿{
-  "name": "Starting Teleporters",
-  "version": "1.0.0",
+  "name": "StartingTeleporters",
+  "version_number": "1.0.0",
   "website_url": "https://github.com/Lomeli12/StartingTeleporter",
   "description": "Start with a teleporter and/or an inverse teleporter",
   "dependencies": [
