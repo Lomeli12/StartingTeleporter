@@ -1,4 +1,4 @@
-﻿using BepInEx;
+using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 
@@ -11,14 +11,11 @@ namespace StartingTeleporter {
 
         private void Awake() {
             log = Logger;
-            // Plugin startup logic
-            log.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
-
             log.LogInfo($"Loading {PluginInfo.PLUGIN_NAME}");
             modConfig = new STConfig(Config);
 
             var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
-
+            
             var originalStart = AccessTools.Method(typeof(StartOfRound), "Start");
             var patchStart =
                 AccessTools.Method(typeof(STPatches), nameof(STPatches.startPatch));
