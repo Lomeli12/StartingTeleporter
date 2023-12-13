@@ -1,5 +1,5 @@
 ﻿### v1.0.1
-- Fixed visual glitches when multiple people have the mod installed.
+- Fixed multiple teleporters spawning. Should also fix some of the visual bugs.
 
 ### v1.0.0
 - Initial release.
