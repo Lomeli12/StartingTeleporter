@@ -8,20 +8,23 @@ internal class STPatches {
     private static readonly string INVERSE_NAME = "Inverse Teleporter";
 
     private static bool idsInitialized;
+    private static bool stLoaded;
     private static int teleporterID = -1;
     private static int inverseTeleporterID = -1;
 
-    internal static void startPatch(ref StartOfRound __instance) {
-        if (!__instance.IsServer)
-            return;
+    internal static void discordPatch(ref StartOfRound __instance) {
+        if (stLoaded) return;
+        if (!__instance.IsHost) return;
         
         if (!idsInitialized)
             getTeleporterIDs(__instance);
+        
         try {
             if (Plugin.modConfig.startWithTeleporter() && teleporterID != -1)
                 unlockShipItem(__instance, teleporterID, TELEPORTER_NAME);
             if (Plugin.modConfig.startWithInverseTeleporter() && inverseTeleporterID != -1)
                 unlockShipItem(__instance, inverseTeleporterID, INVERSE_NAME);
+            stLoaded = true;
         } catch (Exception ex) {
             Plugin.log.LogError($"Failed to unlock items: \n{ex}");
         }

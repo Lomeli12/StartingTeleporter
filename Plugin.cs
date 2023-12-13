@@ -1,4 +1,4 @@
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 
@@ -16,11 +16,11 @@ namespace StartingTeleporter {
 
             var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
             
-            var originalStart = AccessTools.Method(typeof(StartOfRound), "Start");
-            var patchStart =
-                AccessTools.Method(typeof(STPatches), nameof(STPatches.startPatch));
+            var originalDiscord = AccessTools.Method(typeof(StartOfRound), "SetDiscordStatusDetails");
+            var patchDiscord =
+                AccessTools.Method(typeof(STPatches), nameof(STPatches.discordPatch));
 
-            harmony.Patch(originalStart, new HarmonyMethod(patchStart));
+            harmony.Patch(originalDiscord, new HarmonyMethod(patchDiscord));
         }
     }
 }
